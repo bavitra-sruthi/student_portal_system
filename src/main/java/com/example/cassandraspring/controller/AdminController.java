@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 
@@ -21,24 +22,25 @@ public class AdminController {
     }
 
 
-    @GetMapping("/students")
+    @GetMapping("/admin/branch/section/students/subjectId/1")
     public List<Student> getAllStudents() {
-
         return studentService.getAllStudents();
     }
 
-    @GetMapping("/admin/branch/section/students")
-    public List<Student> getAllStudentsBySection() {
-        return studentService.getAllStudentsBySection();
+    @GetMapping("/admin/branch/section/students/subjectId/1/studentId/{id}")
+    public Optional<Student> getStudentById(@PathVariable int id){
+        return studentService.getStudentById(id);
     }
 
+
+
     @PutMapping("/admin/branch/section/students/subj_id/{new_attendance}")
-    public List<Integer> updateAllStudentsAttendance(@PathVariable Integer new_attendance) {
+    public List<Student> updateAllStudentsAttendance(@PathVariable Integer new_attendance) {
         return studentService.updateAllStudentsAttendance(new_attendance);
     }
 
     @PostMapping("/admin/branch/section/add/student")
-    public List<Student> addStudent(@RequestBody Student s) {
+    public Student addStudent(@RequestBody Student s) {
         return studentService.addStudent(s);
 
         }

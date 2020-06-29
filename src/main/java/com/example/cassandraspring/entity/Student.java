@@ -1,6 +1,7 @@
 package com.example.cassandraspring.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 
 import javax.persistence.*;
 
@@ -14,7 +15,7 @@ import java.util.Arrays;
 @Table(name="employee")
 public class Student {
 
-    @Id
+    @PrimaryKey
     private Integer studentId;
     @NotNull
     private String studentName;
@@ -30,6 +31,15 @@ public class Student {
     @NotNull
     private int studentAttendance;
 
+    public Student(Integer studentId, String studentName, String studentEmail, String studentBranch,String studentSection,Integer studentMarks,Integer studentAttendance){
+        this.studentAttendance = studentAttendance;
+        this.studentBranch = studentBranch;
+        this.studentEmail = studentEmail;
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.studentSection = studentSection;
+        this.studentMarks = studentMarks;
+    }
     public Student() {
     }
 

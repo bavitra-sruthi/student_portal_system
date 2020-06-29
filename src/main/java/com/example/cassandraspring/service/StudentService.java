@@ -1,57 +1,52 @@
 package com.example.cassandraspring.service;
 import com.example.cassandraspring.entity.Student;
 
+import com.example.cassandraspring.exceptions.StudentNotFoundException;
 import com.example.cassandraspring.repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class StudentService {
 
-    List<Student> student = new ArrayList<>();
+  //  private static List<Student> student = new ArrayList<>();
     @Autowired
     private StudentRepo studentRepo;
+   /* static {
+        student.add(new Student(2,"will","dwight@dmpc","ECE","B",75,75));
+        student.add(new Student(1,"dwight","dwight@dmpc","ECE","B",75,75));
+    }
+*/
 
-//    public Employee createEmployee(Employee emp) {
-//
-//        return employeeRepo.save(emp);
-//    }
 
 
     public List<Student> getAllStudents() {
         return studentRepo.findAll();
-    }
-
-    public List<Student> getAllStudentsBySection() {
-        List<Student> students = studentRepo.findAll();
-        List<Student> newList = null;
-        for (Student student : students) {
-            if ((student.getStudentBranch() == "Electronics") && (student.getStudentSection() == "A")) {
-                newList.add(student);
-            }
-        }
-        return null;
 
     }
 
-    public Optional<Student> getStudentById(int id) {
+
+    public Optional<Student> getStudentById(int id){
+        Optional <Student> optionalStudent = studentRepo.findById(id);
+        if(!optionalStudent.isPresent())
+            throw new StudentNotFoundException("Student not found!");
         return studentRepo.findById(id);
     }
 
-    public List<Integer> updateAllStudentsAttendance(Integer new_attendance) {
+
+    public List<Student> updateAllStudentsAttendance(Integer new_attendance) {
         List<Student> students = studentRepo.findAll();
         for(Student s : students) {
-            s.setStudentAttendance(s.getStudentAttendance()+new_attendance);
+            int temp = s.getStudentAttendance();
+            s.setStudentAttendance(temp+new_attendance);
        }
-       return null;}
-
-    public List<Student> addStudent(Student s){
-        return getAllStudents();
+       return studentRepo.findAll();
     }
 
-
+    public Student addStudent(Student s){
+        return studentRepo.save(s);
+    }
     }
