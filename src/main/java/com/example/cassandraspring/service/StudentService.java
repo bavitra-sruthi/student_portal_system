@@ -12,16 +12,8 @@ import java.util.Optional;
 @Service
 public class StudentService {
 
-  //  private static List<Student> student = new ArrayList<>();
     @Autowired
     private StudentRepo studentRepo;
-   /* static {
-        student.add(new Student(2,"will","dwight@dmpc","ECE","B",75,75));
-        student.add(new Student(1,"dwight","dwight@dmpc","ECE","B",75,75));
-    }
-*/
-
-
 
     public List<Student> getAllStudents() {
         return studentRepo.findAll();
