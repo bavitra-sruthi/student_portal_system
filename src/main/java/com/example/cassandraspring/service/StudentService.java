@@ -32,8 +32,8 @@ public class StudentService {
     public List<Student> updateAllStudentsAttendance(Integer new_attendance) {
         List<Student> students = studentRepo.findAll();
         for(Student s : students) {
-            int temp = s.getStudentAttendance();
-            s.setStudentAttendance(temp+new_attendance);
+           s.getStudentAttendance();
+            s.setStudentAttendance(s.getStudentAttendance()+new_attendance);
        }
        return studentRepo.findAll();
     }
