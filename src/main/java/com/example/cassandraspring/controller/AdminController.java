@@ -34,8 +34,6 @@ public class AdminController {
     public List<Student> updateAllStudentsAttendance(@PathVariable Integer new_attendance) {
         return studentService.updateAllStudentsAttendance(new_attendance);
     }
-
-    @PutMapping()
     @PostMapping("/admin/branch/section/add/student")
     public Student addStudent(@RequestBody Student s) {
         return studentService.addStudent(s);
