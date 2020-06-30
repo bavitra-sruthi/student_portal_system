@@ -21,24 +21,21 @@ public class AdminController {
         return "Hey the Application is running on port 8050";
     }
 
-
     @GetMapping("/admin/branch/section/students/subjectId/1")
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
-
     @GetMapping("/admin/branch/section/students/subjectId/1/studentId/{id}")
     public Optional<Student> getStudentById(@PathVariable int id){
         return studentService.getStudentById(id);
     }
-
-
 
     @PutMapping("/admin/branch/section/students/subj_id/{new_attendance}")
     public List<Student> updateAllStudentsAttendance(@PathVariable Integer new_attendance) {
         return studentService.updateAllStudentsAttendance(new_attendance);
     }
 
+    @PutMapping()
     @PostMapping("/admin/branch/section/add/student")
     public Student addStudent(@RequestBody Student s) {
         return studentService.addStudent(s);
