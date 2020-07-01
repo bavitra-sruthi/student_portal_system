@@ -31,13 +31,18 @@ public class AdminController {
     }
 
     @PutMapping("/admin/branch/section/students/subj_id/{new_attendance}")
-    public List<Student> updateAllStudentsAttendance(@PathVariable Integer new_attendance) {
+    public List<Student> updateAllStudentsAttendance(@PathVariable int new_attendance) {
         return studentService.updateAllStudentsAttendance(new_attendance);
     }
+
+    @PutMapping("/admin/branch/section/student/{id}/subj_id/{new_attendance}")
+    public Optional<Student> updateAttendanceById(@PathVariable Integer id,@PathVariable int new_attendance){
+        return studentService.updateAttendanceById(id,new_attendance);
+    }
+
     @PostMapping("/admin/branch/section/add/student")
     public Student addStudent(@RequestBody Student s) {
         return studentService.addStudent(s);
-
         }
     }
 
